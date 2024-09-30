@@ -1,0 +1,48 @@
+package com.locadora.service;
+
+import com.google.firebase.database.*;
+import com.locadora.interfaces.IAgenciaService;
+import com.locadora.models.Agencia;
+
+public class AgenciaService implements IAgenciaService {
+
+    private final DatabaseReference agenciaRef = FirebaseDatabase.getInstance().getReference("agencias");
+
+    @Override
+    public void cadastrarAgencia(Agencia agencia) {
+        agenciaRef.child(agencia.getId()).setValueAsync(agencia);
+        System.out.println("Agência cadastrada com sucesso!");
+    }
+
+    @Override
+    public void alterarAgencia(String id, Agencia agencia) {
+        agenciaRef.child(id).setValueAsync(agencia);
+        System.out.println("Agência alterada com sucesso!");
+    }
+
+    @Override
+    public void buscarAgencia(String nome) {
+        agenciaRef.orderByChild("nome").startAt(nome).endAt(nome + "\uf8ff").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Agencia agencia = snapshot.getValue(Agencia.class);
+                    if (agencia != null) {
+                        System.out.println("Agência encontrada: " + agencia.getNome() + " (" + agencia.getId() + ")");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Erro ao buscar agência: " + databaseError.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void deletarAgencia(String id) {
+        agenciaRef.child(id).removeValueAsync();
+        System.out.println("Agência deletada com sucesso!");
+    }
+}
