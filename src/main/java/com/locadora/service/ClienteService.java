@@ -22,7 +22,7 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void buscarCliente(String nome) {
-        clienteRef.orderByChild("nome").startAt(nome).endAt(nome + "\uf8ff").addListenerForSingleValueEvent(new ValueEventListener() {
+        clienteRef.orderByChild("nome").startAt(nome.toLowerCase()).endAt(nome.toLowerCase()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -40,9 +40,30 @@ public class ClienteService implements IClienteService {
         });
     }
 
-    @Override
+//    @Override
+//    public void deletarCliente(String id) {
+//        clienteRef.child(id).removeValueAsync();
+//        System.out.println("Cliente deletado com sucesso!");
+//    }
+
     public void deletarCliente(String id) {
-        clienteRef.child(id).removeValueAsync();
-        System.out.println("Cliente deletado com sucesso!");
+        clienteRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Se a agência existir, remover
+                    clienteRef.child(id).removeValueAsync();
+                    System.out.println("Cliente deletado com sucesso!");
+                } else {
+                    // Se não existir, exibir mensagem de erro
+                    System.out.println("Cliente não encontrada!");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Erro ao tentar deletar cliente: " + databaseError.getMessage());
+            }
+        });
     }
 }
