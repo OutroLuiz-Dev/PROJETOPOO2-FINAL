@@ -19,7 +19,6 @@ public class AgenciaService implements IAgenciaService {
     }
 
 
-
     @Override
     public void alterarAgencia(String id, Agencia agencia) {
         agenciaRef.child(id).setValueAsync(agencia);
@@ -48,7 +47,24 @@ public class AgenciaService implements IAgenciaService {
 
     @Override
     public void deletarAgencia(String id) {
-        agenciaRef.child(id).removeValueAsync();
-        System.out.println("Agência deletada com sucesso!");
+        agenciaRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Se a agência existir, remover
+                    agenciaRef.child(id).removeValueAsync();
+                    System.out.println("Agência deletada com sucesso!");
+                } else {
+                    // Se não existir, exibir mensagem de erro
+                    System.out.println("Agência não encontrada!");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Erro ao tentar deletar agência: " + databaseError.getMessage());
+            }
+        });
     }
 }
+
