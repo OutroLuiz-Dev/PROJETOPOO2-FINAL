@@ -5,6 +5,7 @@ public class Cliente {
     private String nome;
     private String tipo; // Pessoa física ou jurídica
 
+    public Cliente (){}
     public Cliente(String id, String nome, String tipo) {
         this.id = id;
         this.nome = nome;

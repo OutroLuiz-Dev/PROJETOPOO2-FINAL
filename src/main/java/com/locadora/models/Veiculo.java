@@ -6,6 +6,7 @@ public class Veiculo {
     private String nome;
     private boolean disponivel;
 
+    public Veiculo (){}
     public Veiculo(String id, String tipo, String nome, boolean disponivel) {
         this.id = id;
         this.tipo = tipo;
