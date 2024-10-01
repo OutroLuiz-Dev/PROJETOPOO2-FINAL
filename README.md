@@ -1,5 +1,7 @@
 # Gerenciamento de Aluguel de Veículos
 
+Trabalho do GRUPO 3 - SANTANDERCODERS 2024 - AULA: POO 2
+
 Este projeto é uma aplicação para gerenciar o aluguel de veículos, permitindo o cadastro de veículos, agências, clientes e o gerenciamento das locações. A aplicação oferece funcionalidades robustas para administrar o processo de locação de forma eficiente, incluindo regras de negócio para veículos, agências e clientes.
 
 ## Funcionalidades Principais
