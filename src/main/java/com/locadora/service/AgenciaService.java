@@ -4,15 +4,21 @@ import com.google.firebase.database.*;
 import com.locadora.interfaces.IAgenciaService;
 import com.locadora.models.Agencia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AgenciaService implements IAgenciaService {
 
     private final DatabaseReference agenciaRef = FirebaseDatabase.getInstance().getReference("agencias");
 
     @Override
     public void cadastrarAgencia(Agencia agencia) {
+        agencia.setNome(agencia.getNome().toLowerCase());
         agenciaRef.child(agencia.getId()).setValueAsync(agencia);
         System.out.println("Agência cadastrada com sucesso!");
     }
+
+
 
     @Override
     public void alterarAgencia(String id, Agencia agencia) {
@@ -22,7 +28,7 @@ public class AgenciaService implements IAgenciaService {
 
     @Override
     public void buscarAgencia(String nome) {
-        agenciaRef.orderByChild("nome").startAt(nome).endAt(nome + "\uf8ff").addListenerForSingleValueEvent(new ValueEventListener() {
+        agenciaRef.orderByChild("nome").startAt(nome.toLowerCase()).endAt(nome.toLowerCase()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
