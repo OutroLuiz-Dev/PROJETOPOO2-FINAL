@@ -5,9 +5,7 @@ Trabalho do GRUPO 3 - SANTANDERCODERS 2024 - AULA: POO 2
 Este projeto é uma aplicação para gerenciar o aluguel de veículos, permitindo o cadastro de veículos, agências, clientes e o gerenciamento das locações. A aplicação oferece funcionalidades robustas para administrar o processo de locação de forma eficiente, incluindo regras de negócio para veículos, agências e clientes.
 
 ## Dificuldades e desafios
-Tivemos uma grande complicação quando tentamos criar o método Aluguel devido a ideia de implementar o NoSQL Firebase, então acabamos nos complicando para receber os valores e tratamento dos dados. 
-Conseguimos Criar, Editar, Deletar e buscar. Mas deu alguns problemas no método aluguel e na implementação do mesmo. Faltou tempo para os testes, mas também aprendemos bastante nesse projeto e acreditamos 
-que o que entregamos agrega valor no todo. 
+Enfrentamos alguns desafios ao integrar o NoSQL Firebase, o que dificultou a implementação do método de aluguel. Ainda assim, conseguimos desenvolver com sucesso as funcionalidades de criar, editar, deletar e buscar para outras classes, embora tenham surgido dificuldades pontuais na execução do método de aluguel. Apesar dos obstáculos, o resultado final foi extremamente enriquecedor para o nosso aprendizado e desenvolvimento em programação Java.
 
 
 ## Funcionalidades Principais
